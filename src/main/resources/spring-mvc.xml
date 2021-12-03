@@ -19,7 +19,7 @@
     <!-- 静态资源默认servlet配置 -->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
     <mvc:resources location="/public/" mapping="/public/**"></mvc:resources>
-
+    <mvc:resources location="/WEB-INF/page/" mapping="/WEB-INF/page/**"></mvc:resources>
     <!-- 配置返回视图的路径，以及识别后缀是jsp文件 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
