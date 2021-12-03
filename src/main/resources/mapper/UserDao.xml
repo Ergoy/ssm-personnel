@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ssm.dao.IUserDao">
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="loginname!=null">
+                loginname,
+            </if>
+            <if test="password!=null">
+                password,
+            </if>
+            <if test="username!=null">
+                username,
+            </if>
+        </trim>
+    </sql>
+    <sql id="value">
+        <trim suffixOverrides=",">
+            <if test="loginname!=null">
+                #{loginname},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="username!=null">
+                #{username},
+            </if>
+        </trim>
+    </sql>
+    <select id="get_List" resultType="User">
+        select * from user_inf
+    </select>
+    <select id="selectUser" resultType="User" parameterType="long">
+        SELECT * FROM user_inf WHERE id = #{id}
+    </select>
+    <select id="get_LikeList" resultType="User">
+        SELECT * FROM user_inf where loginname like CONCAT('%',#{content},'%'))
+    </select>
+    <select id="get_login" resultType="User" parameterType="User">
+        select * from user_inf  where loginname = #{loginname} AND password = #{password}
+    </select>
+    <insert id="insert_Info" parameterType="User">
+        insert into user_inf (<include refid="key"/>) values(<include refid="value"/>)
+    </insert>
+    <update id="update_Info" parameterType="User">
+        update user_inf
+        <set>
+            <if test="loginname != null">loginname=#{loginname},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="username != null">username=#{username},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="get_Info" parameterType="Integer">
+        SELECT * FROM user_inf WHERE id = #{id}
+    </select>
+    <delete id="delete_Info" parameterType="Integer">
+        delete from user_inf where id = #{id}
+    </delete>
+</mapper>
