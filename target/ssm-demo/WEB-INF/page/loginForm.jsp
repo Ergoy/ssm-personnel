@@ -26,7 +26,7 @@
         <div class="message">企业OA办公系统-管理登录</div>
         <div id="darkbannerwrap"></div>
         ${requestScope.message}
-        <form method="post" class="layui-form" action="${ctx}/login">
+        <form method="post" class="layui-form" action="${ctx}/user/login">
             <input name="loginname" placeholder="用户名" value="${loginname }"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
