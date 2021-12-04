@@ -36,7 +36,7 @@
         SELECT * FROM user_inf WHERE id = #{id}
     </select>
     <select id="get_LikeList" resultType="User">
-        SELECT * FROM user_inf where loginname like CONCAT('%',#{content},'%'))
+        SELECT * FROM user_inf where loginname like CONCAT('%',#{content},'%')
     </select>
     <select id="get_login" resultType="User" parameterType="User">
         select * from user_inf  where loginname = #{loginname} AND password = #{password}

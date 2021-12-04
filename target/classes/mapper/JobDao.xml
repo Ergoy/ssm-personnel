@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ssm.dao.JobDao">
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="remark!=null">
+                remark,
+            </if>
+        </trim>
+    </sql>
+    <sql id="value">
+        <trim suffixOverrides=",">
+            <if test="name!=null and name !=''">
+                #{name},
+            </if>
+            <if test="remark!=null and remark !=''">
+                #{remark},
+            </if>
+        </trim>
+    </sql>
+    <select id="get_List" resultType="Job">
+        select * from job_inf
+    </select>
+    <select id="get_LikeList" resultType="Job">
+        select * from job_inf where name like CONCAT('%',#{content},'%')
+    </select>
+    <insert id="insert_Info" parameterType="Job">
+        insert into job_inf (<include refid="key"/>) values(<include refid="value"/>)
+    </insert>
+    <select id="get_Info" parameterType="Integer">
+        select * from job_inf where id = #{id}
+    </select>
+
+    <update id="update_Info" parameterType="Job">
+        update job_inf
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="remark != null">remark=#{remark},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete_Info" parameterType="Integer">
+        delete from job_inf where id = #{id}
+    </delete>
+</mapper>

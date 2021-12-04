@@ -10,9 +10,9 @@ public interface IUserDao {
     List<User> get_List();
     List<User> get_LikeList(String content);
     User get_login(@Param("loginname") String loginname,@Param("password") String password);
-    void insert_Info(User employee);
+    void insert_Info(User user);
     User get_Info(Integer id);
-    void update_Info(User employee);
+    void update_Info(User user);
     void delete_Info(Integer id);
 
 }
