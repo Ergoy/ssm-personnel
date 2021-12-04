@@ -20,5 +20,11 @@ public class UserController {
         mv.setViewName("selectUser");
         return mv;
     }
+    @RequestMapping("/login")
+    public ModelAndView login() throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("loginForm");
+        return mv;
+    }
 
 }

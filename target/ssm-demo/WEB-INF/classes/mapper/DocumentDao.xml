@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ssm.dao.DocumentDao">
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="title!=null">
+                title,
+            </if>
+            <if test="remark!=null">
+                remark,
+            </if>
+            <if test="create_date!=null">
+                create_date,
+            </if>
+            <if test="user_id!=null">
+                user_id,
+            </if>
+            <if test="filename!=null">
+                filename,
+            </if>
+        </trim>
+    </sql>
+    <sql id="value">
+        <trim suffixOverrides=",">
+            <if test="title!=null">
+                #{title},
+            </if>
+            <if test="remark!=null">
+                #{remark},
+            </if>
+            <if test="create_date!=null">
+                #{create_date},
+            </if>
+            <if test="user_id!=null">
+                #{user_id},
+            </if>
+            <if test="filename!=null">
+                #{filename},
+            </if>
+        </trim>
+    </sql>
+    <select id="get_List" resultType="Document">
+        select * from document_inf
+    </select>
+    <select id="get_LikeList" resultType="Document">
+        select * from document_inf where title like CONCAT('%',#{content},'%')
+    </select>
+    <insert id="insert_Info" parameterType="Document">
+        insert into document_inf (<include refid="key"/>) values(<include refid="value"/>)
+    </insert>
+    <select id="get_Info" resultType="Document" parameterType="Integer">
+        select * from document_inf where id = #{id}
+    </select>
+    <update id="update_Info" parameterType="Document">
+        update document_inf
+        <set>
+            <if test="title != null">title=#{title},</if>
+            <if test="remark != null">remark=#{remark},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="delete_Info" parameterType="Integer">
+        delete from document_inf where id = #{id}
+    </delete>
+</mapper>

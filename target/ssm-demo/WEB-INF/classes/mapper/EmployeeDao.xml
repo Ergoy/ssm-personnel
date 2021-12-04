@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="com.ssm.dao.EmployeeDao">
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="card_id!=null">
+                card_id,
+            </if>
+            <if test="password!=null">
+                password,
+            </if>
+            <if test="address!=null">
+                address,
+            </if>
+            <if test="post_code!=null">
+                post_code,
+            </if>
+            <if test="tel!=null">
+                tel,
+            </if>
+            <if test="phone!=null">
+                phone,
+            </if>
+            <if test="qq_nul!=null">
+                qq_nul,
+            </if>
+            <if test="sex!=null">
+                sex,
+            </if>
+            <if test="party!=null">
+                party,
+            </if>
+            <if test="birthday!=null">
+                birthday,
+            </if>
+            <if test="race!=null">
+                race,
+            </if>
+            <if test="education!=null">
+                education,
+            </if>
+            <if test="speciality!=null">
+                speciality,
+            </if>
+            <if test="hobby!=null">
+                hobby,
+            </if>
+            <if test="remark!=null">
+                remark,
+            </if>
+            <if test="create_date!=null">
+                create_date,
+            </if>
+            <if test="dept_id!=null">
+                dept_id,
+            </if>
+            <if test="job_id!=null">
+                job_id,
+            </if>
+        </trim>
+    </sql>
+    <sql id="value">
+        <trim suffixOverrides=",">
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="card_id!=null">
+                #{card_id},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="address!=null">
+                #{address},
+            </if>
+            <if test="post_code!=null">
+                #{post_code},
+            </if>
+            <if test="tel!=null">
+                #{tel},
+            </if>
+            <if test="phone!=null">
+                #{phone},
+            </if>
+            <if test="qq_nul!=null">
+                #{qq_nul},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="sex!=null">
+                #{sex},
+            </if>
+            <if test="party!=null">
+                #{party},
+            </if>
+            <if test="birthday!=null">
+                #{birthday},
+            </if>
+            <if test="race!=null">
+                #{race},
+            </if>
+            <if test="education!=null">
+                #{education},
+            </if>
+            <if test="speciality!=null">
+                #{speciality},
+            </if>
+            <if test="hobby!=null">
+                #{hobby},
+            </if>
+            <if test="remark!=null">
+                #{remark},
+            </if>
+            <if test="create_date!=null">
+                #{create_date},
+            </if>
+            <if test="dept_id!=null">
+                #{dept_id},
+            </if>
+            <if test="job_id!=null">
+                #{job_id},
+            </if>
+        </trim>
+    </sql>
+    <select id="get_List" resultType="Employee">
+        select * from employee_inf
+    </select>
+    <select id="get_LikeList" resultType="Employee">
+        select * from employee_inf where name like CONCAT('%',#{content},'%')
+    </select>
+    <insert id="insert_Info" parameterType="Employee">
+        insert into employee_inf (<include refid="key"/>) values(<include refid="value"/>)
+    </insert>
+    <select id="get_Info" parameterType="Integer">
+        select * from employee_inf where id = #{id}
+    </select>
+    <update id="update_Info" parameterType="Employee">
+        update employee_inf
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="card_id != null">card_id=#{card_id},</if>
+            <if test="address != null">address=#{address},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="post_code != null">post_code=#{post_code},</if>
+            <if test="tel != null">tel=#{tel},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="qq_nul != null">qq_nul=#{qq_nul},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="sex != null">sex=#{sex},</if>
+            <if test="party != null">party=#{party},</if>
+            <if test="birthday != null">birthday=#{birthday},</if>
+            <if test="race != null">race=#{race},</if>
+            <if test="education != null">education=#{education},</if>
+            <if test="speciality != null">speciality=#{speciality},</if>
+            <if test="hobby != null">hobby=#{hobby},</if>
+            <if test="remark != null">remark=#{remark},</if>
+            <if test="dept_id != null">dept_id=#{dept_id},</if>
+            <if test="job_id != null">job_id=#{job_id},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete_Info" parameterType="Integer">
+        delete from employee_inf where id = #{id}
+    </delete>
+    <select id="get_ByInfo" resultType="Employee" parameterType="Employee">
+        select * from employee_inf where name=#{name} and password=#{password}
+    </select>
+</mapper>
